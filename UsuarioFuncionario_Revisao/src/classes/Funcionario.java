@@ -1,5 +1,6 @@
 package classes;
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Funcionario extends Usuario {
 	
@@ -35,10 +36,10 @@ public class Funcionario extends Usuario {
 		this.horasTrabalhadas = horasTrabalhadas;
 	}
 
-	public float[] getValorHora() {
+	public double[] getValorHora() {
 		return valorHora;
 	}
-	public void setValorHora(float[] valorHora) {
+	public void setValorHora(double[] valorHora) {
 		this.valorHora = valorHora;
 	}
 
@@ -75,13 +76,63 @@ public class Funcionario extends Usuario {
 	}
 	
 	//N maiores salários
-	public double maioresSal(int n) {
-		return 
+	public double[] maioresSal(int n) {
+		double[] maiores = new double[n];
+		for (int i=0; i<n; i++) {
+			maiores[i] = 0;
+		}
+		
+		for (int i=0; i<mesesTrab(); i++) {
+			if(n > 1) {
+				if (salarioMes(i) > maiores[n-1]) {
+					int pos = n-1;
+					for (int x=n-2; x>=0; x--) {
+						if (salarioMes(i) > maiores[x]) {
+							pos = x;
+						}
+					}
+					for (int x=n-2; x>pos; x--) {
+						maiores[x+1] = maiores[x];
+					}
+					maiores[pos] = salarioMes(i);
+				}
+			}
+			else {
+				if (salarioMes(i) > maiores[0])
+					maiores[0] = salarioMes(i);
+			}		
+		}
+		return maiores;
 	}
 	
 	//N menores salários
-	public menoresSal() {
+	public double[] menoresSal(int n) {
+		double[] menores = new double[n];
+		for (int i=0; i<n; i++) {
+			menores[i] = maioresSal(1)[0];
+		}
 		
+		for (int i=0; i<mesesTrab(); i++) {
+			if(n > 1) {
+				if (salarioMes(i) < menores[n-1]) {
+					int pos = n-1;
+					for (int x=n-2; x>=0; x--) {
+						if (salarioMes(i) < menores[x]) {
+							pos = x;
+						}
+					}
+					for (int x=n-2; x>pos; x--) {
+						menores[x+1] = menores[x];
+					}
+					menores[pos] = salarioMes(i);
+				}
+			}
+			else {
+				if (salarioMes(i) < menores[0])
+					menores[0] = salarioMes(i);
+			}		
+		}
+		return menores;
 	}
 	
 	//Número de meses trabalhados
@@ -90,13 +141,37 @@ public class Funcionario extends Usuario {
 	}
 	
 	//Anos e meses trabalhados
-	public anosMesesTrab() {
-		mesesTrab() / 12
+	public int[] anosMesesTrab() {
+		int[] anosMeses = new int[2];
+		anosMeses[0] = (int) Math.ceil(mesesTrab() / 12);
+		anosMeses[1] = mesesTrab() % 12;
+		return anosMeses;
 	}
 	
+	
 	//Previsão de ano e idade de aposentadoria
-	public anoAposentadoria() {
+	public int anoAposentadoria() {
+		int anosC = anosMesesTrab()[0];
+		Period dtIdade = (Period.between(dataNasc, LocalDate.now()));
 		
+		if (dtIdade.getYears() < 65) {
+			if (anosC < 35) {
+				int anosRestantes = 65 - dtIdade.getYears();
+				if (anosC + anosRestantes < 35) {
+					anosRestantes = anosRestantes + (35 - (anosC + anosRestantes));
+					return anosRestantes;
+				}
+				return anosRestantes;	
+			}
+			else{
+				return 65 - dtIdade.getYears();
+			}
+		}
+		
+		else if (anosC < 35) 
+			return 35 - anosC;
+		
+		return 0;
 	}
 
 }
