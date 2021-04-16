@@ -1,5 +1,8 @@
 package classes;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+
 public class Usuario {
 	private String usuario;
 	private String senha;
@@ -22,11 +25,28 @@ public class Usuario {
 	}
 	
 	public void setSenha(String senha) {
-		this.senha = senha;
+		this.senha = this.encriptarSenha(senha);
+	}
+	
+	//Encriptar Senha
+	public String encriptarSenha(String senha) {
+		
+		String senhaSha1 = "";
+		
+		try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-1");
+	        digest.reset();
+	        digest.update(senha.getBytes("utf8"));
+	        senhaSha1 = String.format("%040x", new BigInteger(1, digest.digest()));
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return senhaSha1;
 	}
 	
 	//Cadastro
-	public boolean Cadastro(String usuario, String senha) {
+	public boolean Cadastrar(String usuario, String senha) {
 		if (senha != usuario) {
 			setUsuario(usuario);
 			setSenha(senha);
@@ -35,9 +55,9 @@ public class Usuario {
 		return false;
 	}
 	
-	//Login (forma temporaria)
-	public boolean Login(String usuario, String senha) {
-		if (usuario == this.usuario && senha == this.senha)
+	//Validação de Login
+	public boolean validarLogin(String usuario, String senha) {
+		if (usuario == this.usuario && this.encriptarSenha(senha) == this.senha)
 			return true;
 		return false;
 	}

@@ -2,6 +2,7 @@ package classes;
 import java.time.LocalDate;
 import java.time.Period;
 
+
 public class Funcionario extends Usuario {
 	
 	private String nome;
@@ -101,7 +102,7 @@ public class Funcionario extends Usuario {
 				if (salarioMes(i) > maiores[0])
 					maiores[0] = salarioMes(i);
 			}		
-		}
+		} 
 		return maiores;
 	}
 	
