@@ -1,24 +1,27 @@
 package classes;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 
 
 public class Funcionario extends Usuario {
 	
 	private String nome;
 	private String email;
-	private int[] horasTrabalhadas;
-	private double[] valorHora;
+	private ArrayList<Integer> horasTrabalhadas;
+	private ArrayList<Double> valorHora;
 	private LocalDate dataNasc;
 	
+	//Construtor
 	public Funcionario() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 	
 	//Getters and Setters
 	public String getNome() {
 		return nome;
 	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -30,17 +33,17 @@ public class Funcionario extends Usuario {
 		this.email = email;
 	}
 
-	public int[] getHorasTrabalhadas() {
+	public ArrayList<Integer> getHorasTrabalhadas() {
 		return horasTrabalhadas;
 	}
-	public void setHorasTrabalhadas(int[] horasTrabalhadas) {
+	public void setHorasTrabalhadas(ArrayList<Integer> horasTrabalhadas) {
 		this.horasTrabalhadas = horasTrabalhadas;
 	}
 
-	public double[] getValorHora() {
+	public ArrayList<Double> getValorHora() {
 		return valorHora;
 	}
-	public void setValorHora(double[] valorHora) {
+	public void setValorHora(ArrayList<Double> valorHora) {
 		this.valorHora = valorHora;
 	}
 
@@ -51,21 +54,49 @@ public class Funcionario extends Usuario {
 		this.dataNasc = dataNasc;
 	}
 	
+	//Cadastro Funcionario
+	public boolean cadFuncionario(String usuario, String senha, String nome, String email, LocalDate dataNasc) {
+		if (this.cadUsuario(usuario, senha)) {
+			this.setNome(nome);
+			this.setEmail(email);
+			this.setDataNasc(dataNasc);
+			this.horasTrabalhadas = new ArrayList<Integer>();
+			this.valorHora = new ArrayList<Double>();
+			return true;
+		}
+		return false;
+	}
 	
-	//Salário por mês
+	//Adicionar horas trabalhadas
+	public void addHorasTrabalhadas(int horasTrabalhadas) {
+		this.horasTrabalhadas.add(horasTrabalhadas);
+	}
+	
+	//Adicionar valor/hora
+	public void addValorHora(double valorHora) {
+		this.valorHora.add(valorHora);
+	}
+	
+	//Adicionar horas trabalhadas + valor/hora
+	public void addHorasValor(int horasTrabalhadas, double valorHora) {
+		this.addHorasTrabalhadas(horasTrabalhadas);
+		this.addValorHora(valorHora);
+	}
+	
+	//Salário do último mês
 	public double salarioMes() {
-		return valorHora[valorHora.length-1] * horasTrabalhadas[horasTrabalhadas.length-1];
+		return valorHora.get(valorHora.size()-1) * horasTrabalhadas.get(horasTrabalhadas.size()-1);
 	}
 	
 	//Salário de um determinado mês
 	public double salarioMes(int mes) {
-		return valorHora[mes-1] * horasTrabalhadas[mes-1];
+		return valorHora.get(mes-1) * horasTrabalhadas.get(mes-1);
 	}
 	
 	//Soma total de todos os salários
 	public double valTotalSal() {
 		double s = 0;
-		for (int i=0; i<mesesTrab(); i++) {
+		for (int i=1; i<=mesesTrab(); i++) {
 			s = s + salarioMes(i);
 		}
 		return s;
@@ -83,7 +114,7 @@ public class Funcionario extends Usuario {
 			maiores[i] = 0;
 		}
 		
-		for (int i=0; i<mesesTrab(); i++) {
+		for (int i=1; i<=mesesTrab(); i++) {
 			if(n > 1) {
 				if (salarioMes(i) > maiores[n-1]) {
 					int pos = n-1;
@@ -113,7 +144,7 @@ public class Funcionario extends Usuario {
 			menores[i] = maioresSal(1)[0];
 		}
 		
-		for (int i=0; i<mesesTrab(); i++) {
+		for (int i=1; i<=mesesTrab(); i++) {
 			if(n > 1) {
 				if (salarioMes(i) < menores[n-1]) {
 					int pos = n-1;
@@ -138,7 +169,7 @@ public class Funcionario extends Usuario {
 	
 	//Número de meses trabalhados
 	public int mesesTrab() {
-		return horasTrabalhadas.length;
+		return horasTrabalhadas.size();
 	}
 	
 	//Anos e meses trabalhados
