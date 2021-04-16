@@ -7,7 +7,7 @@ public class Usuario {
 	private String usuario;
 	private String senha;
 	
-	//Construtor vazio pois os dados serão setados no cadastro
+	//Construtor
 	public Usuario() {
 	}
 	
@@ -24,8 +24,12 @@ public class Usuario {
 		return senha;
 	}
 	
-	public void setSenha(String senha) {
-		this.senha = this.encriptarSenha(senha);
+	public boolean setSenha(String senha) {
+		if(senha != this.usuario) {
+			this.senha = this.encriptarSenha(senha);
+			return true;
+		}
+		return false;
 	}
 	
 	//Encriptar Senha
@@ -45,17 +49,14 @@ public class Usuario {
 		return senhaSha1;
 	}
 	
-	//Cadastro
-	public boolean Cadastrar(String usuario, String senha) {
-		if (senha != usuario) {
-			setUsuario(usuario);
-			setSenha(senha);
-			return true;
-		}
-		return false;
+	//Cadastrar
+	public boolean cadUsuario(String usuario, String senha) {
+		setUsuario(usuario);
+		return setSenha(senha);
+
 	}
 	
-	//Validação de Login
+	//Validar Login
 	public boolean validarLogin(String usuario, String senha) {
 		if (usuario == this.usuario && this.encriptarSenha(senha) == this.senha)
 			return true;
