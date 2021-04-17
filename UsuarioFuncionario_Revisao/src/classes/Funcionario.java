@@ -180,30 +180,36 @@ public class Funcionario extends Usuario {
 		return anosMeses;
 	}
 	
+	public int idade() {
+		return LocalDate.now().getYear() - dataNasc.getYear();
+	}
 	
 	//Previsão de ano e idade de aposentadoria
-	public int anoAposentadoria() {
+	public int[] anoAposentadoria() {
 		int anosC = anosMesesTrab()[0];
-		Period dtIdade = (Period.between(dataNasc, LocalDate.now()));
+		int anosRestantes;
+		int[] anoIdade = new int[2];
 		
-		if (dtIdade.getYears() < 65) {
-			if (anosC < 35) {
-				int anosRestantes = 65 - dtIdade.getYears();
-				if (anosC + anosRestantes < 35) {
-					anosRestantes = anosRestantes + (35 - (anosC + anosRestantes));
-					return anosRestantes;
-				}
-				return anosRestantes;	
+		if (this.idade() < 65) {
+			anosRestantes = 65 - this.idade();
+			if (anosC + anosRestantes < 35) {
+				anosRestantes = anosRestantes + (35 - (anosC + anosRestantes));	
 			}
-			else{
-				return 65 - dtIdade.getYears();
-			}
+			anoIdade[0] = this.idade() + anosRestantes;
+			anoIdade[1] = LocalDate.now().getYear() + anosRestantes;
+			return anoIdade;	
 		}
 		
-		else if (anosC < 35) 
-			return 35 - anosC;
+		else if (anosC < 35) {
+			anosRestantes = 35 - anosC;
+			anoIdade[0] = this.idade() + anosRestantes;
+			anoIdade[1] = LocalDate.now().getYear() + anosRestantes;
+			return anoIdade;
+		}
 		
-		return 0;
+		anoIdade[0] = 0;
+		anoIdade[1] = LocalDate.now().getYear();
+		return anoIdade;
 	}
 
 }

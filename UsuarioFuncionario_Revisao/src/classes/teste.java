@@ -60,6 +60,8 @@ public class teste {
 		
 		
 		//9
-		System.out.println("\n9 - Previsão de aposentadoria: " + f1.anoAposentadoria());
+		System.out.println("\n9 - Previsão de aposentadoria: ");
+		System.out.println("Ano: "  + f1.anoAposentadoria()[1]);
+		System.out.println("Idade: " + f1.anoAposentadoria()[0]);
 	}
 }
