@@ -49,7 +49,7 @@ public class Main {
 		
 		
 		//7
-		n = 3;
+		n = 2;
 		System.out.println("\n7 - " + n + " menores salários: ");
 		double[] menoresSal = f1.menoresSal(n);
 		System.out.println(Arrays.toString(menoresSal));
