@@ -114,19 +114,7 @@ public class Funcionario extends Usuario {
 	public double mediaSal() {
 		return valTotalSal() / mesesTrab();
 	}
-	
-	public double[] maioresSal2(int n) {
-		double[] maiores = new double[n];
-		for (int i=0; i<n; i++) {
-			maiores[i] = 0;
-		}
-		
-		
-		
-		System.out.println(Arrays.toString(maiores));
-		
-		return maiores;
-	}
+
 	
 	//N maiores salários
 	public double[] maioresSal(int n) {
