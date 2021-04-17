@@ -1,7 +1,7 @@
 package classes;
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Funcionario extends Usuario {
@@ -54,6 +54,7 @@ public class Funcionario extends Usuario {
 		this.dataNasc = dataNasc;
 	}
 	
+	
 	//Cadastro Funcionario
 	public boolean cadFuncionario(String usuario, String senha, String nome, String email, LocalDate dataNasc) {
 		if (this.cadUsuario(usuario, senha)) {
@@ -67,15 +68,18 @@ public class Funcionario extends Usuario {
 		return false;
 	}
 	
+	
 	//Adicionar horas trabalhadas
 	public void addHorasTrabalhadas(int horasTrabalhadas) {
 		this.horasTrabalhadas.add(horasTrabalhadas);
 	}
 	
+	
 	//Adicionar valor/hora
 	public void addValorHora(double valorHora) {
 		this.valorHora.add(valorHora);
 	}
+	
 	
 	//Adicionar horas trabalhadas + valor/hora
 	public void addHorasValor(int horasTrabalhadas, double valorHora) {
@@ -83,15 +87,18 @@ public class Funcionario extends Usuario {
 		this.addValorHora(valorHora);
 	}
 	
+	
 	//Salário do último mês
 	public double salarioMes() {
 		return valorHora.get(valorHora.size()-1) * horasTrabalhadas.get(horasTrabalhadas.size()-1);
 	}
 	
+	
 	//Salário de um determinado mês
 	public double salarioMes(int mes) {
 		return valorHora.get(mes-1) * horasTrabalhadas.get(mes-1);
 	}
+	
 	
 	//Soma total de todos os salários
 	public double valTotalSal() {
@@ -102,9 +109,23 @@ public class Funcionario extends Usuario {
 		return s;
 	}
 	
+	
 	//Média de todos os salários
 	public double mediaSal() {
 		return valTotalSal() / mesesTrab();
+	}
+	
+	public double[] maioresSal2(int n) {
+		double[] maiores = new double[n];
+		for (int i=0; i<n; i++) {
+			maiores[i] = 0;
+		}
+		
+		
+		
+		System.out.println(Arrays.toString(maiores));
+		
+		return maiores;
 	}
 	
 	//N maiores salários
@@ -118,13 +139,13 @@ public class Funcionario extends Usuario {
 			if(n > 1) {
 				if (salarioMes(i) > maiores[n-1]) {
 					int pos = n-1;
-					for (int x=n-2; x>=0; x--) {
+					for (int x=n-1; x>=0; x--) {
 						if (salarioMes(i) > maiores[x]) {
 							pos = x;
 						}
 					}
-					for (int x=n-2; x>pos; x--) {
-						maiores[x+1] = maiores[x];
+					for (int x=n-1; x>pos; x--) {
+						maiores[x] = maiores[x-1];
 					}
 					maiores[pos] = salarioMes(i);
 				}
@@ -132,10 +153,11 @@ public class Funcionario extends Usuario {
 			else {
 				if (salarioMes(i) > maiores[0])
 					maiores[0] = salarioMes(i);
-			}		
+			}
 		} 
 		return maiores;
 	}
+	
 	
 	//N menores salários
 	public double[] menoresSal(int n) {
@@ -153,8 +175,8 @@ public class Funcionario extends Usuario {
 							pos = x;
 						}
 					}
-					for (int x=n-2; x>pos; x--) {
-						menores[x+1] = menores[x];
+					for (int x=n-1; x>pos; x--) {
+						menores[x] = menores[x-1];
 					}
 					menores[pos] = salarioMes(i);
 				}
@@ -162,15 +184,17 @@ public class Funcionario extends Usuario {
 			else {
 				if (salarioMes(i) < menores[0])
 					menores[0] = salarioMes(i);
-			}		
+			}
 		}
 		return menores;
 	}
+	
 	
 	//Número de meses trabalhados
 	public int mesesTrab() {
 		return horasTrabalhadas.size();
 	}
+	
 	
 	//Anos e meses trabalhados
 	public int[] anosMesesTrab() {
@@ -180,9 +204,12 @@ public class Funcionario extends Usuario {
 		return anosMeses;
 	}
 	
+	
+	//idade
 	public int idade() {
 		return LocalDate.now().getYear() - dataNasc.getYear();
 	}
+	
 	
 	//Previsão de ano e idade de aposentadoria
 	public int[] anoAposentadoria() {
