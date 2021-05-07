@@ -10,7 +10,7 @@ public class PersistenciaJSON implements Persistencia {
 		System.out.println("Escrevendo JSON");
 	}
 	
-	public String ler() {
-		return "";
+	public String[] ler(String matricula) {
+		return null;
 	}
 }

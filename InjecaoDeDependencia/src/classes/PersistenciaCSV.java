@@ -10,7 +10,7 @@ public class PersistenciaCSV implements Persistencia {
 		System.out.println("Escrevendo CSV");
 	}
 	
-	public String ler() {
-		return "";
+	public String[] ler(String matricula) {
+		return null;
 	}
 }

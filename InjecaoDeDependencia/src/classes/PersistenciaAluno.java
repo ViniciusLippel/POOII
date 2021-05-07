@@ -15,6 +15,10 @@ public class PersistenciaAluno {
 		persistencia.escrever(atributosParaVetor());
 	}
 	
+	public String[] ler(String matricula) throws Exception {
+		return persistencia.ler(matricula);
+	}
+	
 	public String[] atributosParaVetor() {
 		
 		String[] v = {
