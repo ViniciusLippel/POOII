@@ -11,11 +11,8 @@ import javax.xml.parsers.*;
 import java.io.*;
 
 public class PersistenciaXML implements Persistencia{
-
-	public PersistenciaXML() {
-		
-	}
 	
+	//Gravar
 	public void gravar(String[] val) {
 		
 		try {
@@ -30,7 +27,7 @@ public class PersistenciaXML implements Persistencia{
     		  		+ "</aluno>\n"
 		    				  );
 		      myWriter.close();
-		      System.out.println("Arquivo criado com sucesso.");
+		      System.out.println("Arquivo "+val[1]+".xml criado com sucesso.");
 		      
 		    } catch (IOException e) {
 		      System.out.println("Erro ao criar arquivo.");
@@ -38,6 +35,7 @@ public class PersistenciaXML implements Persistencia{
 		    }
 	}
 	
+	//Ler
 	public String[] ler(String matricula) {
 		
 		try {

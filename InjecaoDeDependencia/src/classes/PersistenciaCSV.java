@@ -8,13 +8,8 @@ import java.io.PrintWriter;
 
 
 public class PersistenciaCSV implements Persistencia {
-
 	
-	public PersistenciaCSV() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
+	//Gravar
 	public void gravar(String[] val) {
 		
 		try {
@@ -24,7 +19,7 @@ public class PersistenciaCSV implements Persistencia {
 			gravarArq.printf("%s;%s;%s;%s;%s\n", val[0], val[1], val[2], val[3], val[4]);
 			arq.close();
 			
-			System.out.println("Arquivo criado com sucesso.");
+			System.out.println("Arquivo "+val[1]+".csv criado com sucesso.");
 			
 		} catch (IOException e) {
 			
@@ -34,7 +29,7 @@ public class PersistenciaCSV implements Persistencia {
 		}	
 	}
 	
-	
+	//Ler
 	public String[] ler(String matricula) {
 		
 		try {

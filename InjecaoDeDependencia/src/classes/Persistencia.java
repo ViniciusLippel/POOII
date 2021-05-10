@@ -4,5 +4,5 @@ public interface Persistencia {
 	
 	public void gravar(String[] val);
 	
-	public String[] ler(String matricula) throws Exception;
+	public String[] ler(String matricula);
 }

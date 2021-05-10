@@ -1,5 +1,7 @@
 package classes;
 
+import java.time.LocalDate;
+
 public class PersistenciaAluno {
 	
 	private Aluno aluno;
@@ -10,16 +12,18 @@ public class PersistenciaAluno {
 		this.persistencia = persistencia;
 	}
 	
-	public void gerarArquivo() {
-		//Aqui transformamos os dados do aluno em String para passar para a persistencia (?)
-		persistencia.gravar(atributosParaVetor());
+	//Gravar
+	public void gravar() {
+		persistencia.gravar(objetoParaVetor());
 	}
 	
-	public String[] ler(String matricula) throws Exception {
-		return persistencia.ler(matricula);
+	//Ler
+	public Aluno ler(String matricula) throws Exception {
+		return vetorParaObjeto(persistencia.ler(matricula));
 	}
 	
-	public String[] atributosParaVetor() {
+	//Retornar atributos do aluno em String[]
+	public String[] objetoParaVetor() {
 		
 		String[] v = {
 				aluno.getNome(), 
@@ -31,5 +35,11 @@ public class PersistenciaAluno {
 		
 		return v;
 	}
-
+	
+	//Retornar aluno a partir de String[]
+	public Aluno vetorParaObjeto(String[] v) {
+		Aluno a = new Aluno(v[0], v[1], v[2], LocalDate.parse(v[3]), v[4]);
+		
+		return a;
+	}
 }

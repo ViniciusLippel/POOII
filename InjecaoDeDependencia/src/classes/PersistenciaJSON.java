@@ -10,11 +10,7 @@ import com.google.gson.GsonBuilder;
 
 public class PersistenciaJSON implements Persistencia {
 
-	public PersistenciaJSON() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
+	//Gravar
 	public void gravar(String[] val) {
 
 		GsonBuilder builder = new GsonBuilder();
@@ -26,7 +22,7 @@ public class PersistenciaJSON implements Persistencia {
 			writer = new FileWriter("dados_alunos/json/"+val[1]+".json");
 			writer.write(gson.toJson(val));
 			writer.close();
-			System.out.println("Arquivo criado com sucesso.");
+			System.out.println("Arquivo "+val[1]+".json criado com sucesso.");
 			
 		} catch (IOException e) {
 			
@@ -36,8 +32,8 @@ public class PersistenciaJSON implements Persistencia {
 		}
 	}
 	
-	
-	public String[] ler(String matricula) throws Exception {
+	//Ler
+	public String[] ler(String matricula) {
 		
 		Gson gson = new Gson();
 		String[] dados = new String[5];
