@@ -1,10 +1,15 @@
 package classes;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+//import org.json.*;
+import java.io.BufferedReader;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.google.gson.*;
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class PersistenciaJSON implements Persistencia {
 
@@ -12,35 +17,43 @@ public class PersistenciaJSON implements Persistencia {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void escrever(String[] val) {
+	
+	public void gravar(String[] val) {
+
+		GsonBuilder builder = new GsonBuilder();
+		Gson gson = builder.create();
+		FileWriter writer;
+		
 		try {
-		      FileWriter myWriter = new FileWriter("dados_alunos/json/"+val[1]+".json");
-		      myWriter.write(
-		    		  "\"aluno\": [{"
-		    		  + "\n\t\"nome\": "+val[0]
-    				  + "\n\t\"matricula\": "+val[1]
-					  + "\n\t\"cpf\": "+val[2]
-					  + "\n\t\"dtNasc\": "+val[3]
-					  + "\n\t\"email\": "+val[4]
-					  + "\n}]"
-		    				  );
-		      myWriter.close();
-		      System.out.println("Arquivo criado com sucesso.");
-		      
-		    } catch (IOException e) {
-		      System.out.println("Erro ao criar arquivo.");
-		      e.printStackTrace();
-		    }
+			
+			writer = new FileWriter("dados_alunos/json/"+val[1]+".json");
+			writer.write(gson.toJson(val));
+			writer.close();
+			System.out.println("Arquivo gerado");
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+			System.out.println("Erro ao gerar arquivo");
+			
+		}
 	}
 	
+	
 	public String[] ler(String matricula) throws Exception {
-	    @SuppressWarnings("deprecation")
-		JsonElement jelement = new JsonParser().parse(matricula+".json");
-	    JsonObject  jobject = jelement.getAsJsonObject();
-	    JsonArray jarray = jobject.getAsJsonArray("aluno");
-	    jobject = jarray.get(0).getAsJsonObject();
-	    String result = jobject.get("nome").getAsString();
-	    System.out.println(result);
-	    return null;
+		
+		Gson gson = new Gson();
+		String[] a = new String[5];
+		
+	        try {
+	 
+	            BufferedReader br = new BufferedReader(new FileReader("dados_alunos/json/"+matricula+".json"));
+	            a = gson.fromJson(br, String[].class);
+	 
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		
+		return a;
 	}
 }

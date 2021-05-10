@@ -13,7 +13,7 @@ public class Main {
 		
 		//pa.gerarArquivo();
 		String[] vinicius = pa.ler("2019002219");
-		//System.out.println(vinicius[4]);
+		System.out.println(vinicius[4]);
 	}
 
 }

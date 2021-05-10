@@ -15,7 +15,7 @@ public class PersistenciaXML implements Persistencia{
 		
 	}
 	
-	public void escrever(String[] val) {
+	public void gravar(String[] val) {
 		try {
 		      FileWriter myWriter = new FileWriter("dados_alunos/xml/"+val[1]+".xml");
 		      myWriter.write(

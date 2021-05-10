@@ -12,7 +12,7 @@ public class PersistenciaAluno {
 	
 	public void gerarArquivo() {
 		//Aqui transformamos os dados do aluno em String para passar para a persistencia (?)
-		persistencia.escrever(atributosParaVetor());
+		persistencia.gravar(atributosParaVetor());
 	}
 	
 	public String[] ler(String matricula) throws Exception {

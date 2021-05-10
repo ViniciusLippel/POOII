@@ -6,7 +6,7 @@ public class PersistenciaCSV implements Persistencia {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void escrever(String[] val) {
+	public void gravar(String[] val) {
 		System.out.println("Escrevendo CSV");
 	}
 	
