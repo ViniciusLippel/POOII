@@ -16,6 +16,7 @@ public class Main {
 		PersistenciaJSON pjson = new PersistenciaJSON();
 		PersistenciaCSV pcsv = new PersistenciaCSV();
 		
+		
 		//Armazenando dados nos diferentes formatos
 		System.out.println("Gravando dados dos alunos...\n");
 		
@@ -31,7 +32,8 @@ public class Main {
 		PersistenciaAluno p3 = new PersistenciaAluno(dwight, pjson);
 		p3.gravar();
 		
-		//Obtendo dados de cada aluno através do arquivo de persistência
+		
+		//Obtendo dados dos alunos através dos respectivos arquivos
 		System.out.println("\nBuscando dados dos alunos...\n");
 		
 		Aluno a0 = p0.ler("2020321123");
