@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.w3c.dom.*;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.*;
 import java.io.*;
@@ -16,6 +17,7 @@ public class PersistenciaXML implements Persistencia{
 	}
 	
 	public void gravar(String[] val) {
+		
 		try {
 		      FileWriter myWriter = new FileWriter("dados_alunos/xml/"+val[1]+".xml");
 		      myWriter.write(
@@ -36,30 +38,45 @@ public class PersistenciaXML implements Persistencia{
 		    }
 	}
 	
-	public String[] ler(String matricula) throws Exception {
+	public String[] ler(String matricula) {
 		
-		//Document Builder
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = factory.newDocumentBuilder();
-		 
-		//Document
-		Document document = builder.parse(new File("dados_alunos/xml/"+matricula+".xml"));
-		 
-		//Normalize
-		document.getDocumentElement().normalize();
-		 
-		//Get data
-		ArrayList<String> dadosL = new ArrayList<String>();
-		
-	    dadosL.add(document.getElementsByTagName("nome").item(0).getTextContent());
-	    dadosL.add(document.getElementsByTagName("matricula").item(0).getTextContent());
-	    dadosL.add(document.getElementsByTagName("cpf").item(0).getTextContent());
-	    dadosL.add(document.getElementsByTagName("dtNasc").item(0).getTextContent());
-	    dadosL.add(document.getElementsByTagName("email").item(0).getTextContent());
-	    
-	    String[] dadosV = dadosL.toArray(new String[dadosL.size()]); 
-		
-	    
-		return dadosV;
+		try {
+
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			 
+			Document document = builder.parse(new File("dados_alunos/xml/"+matricula+".xml"));
+			 
+			document.getDocumentElement().normalize();
+			 
+			ArrayList<String> dadosL = new ArrayList<String>();
+			
+		    dadosL.add(document.getElementsByTagName("nome").item(0).getTextContent());
+		    dadosL.add(document.getElementsByTagName("matricula").item(0).getTextContent());
+		    dadosL.add(document.getElementsByTagName("cpf").item(0).getTextContent());
+		    dadosL.add(document.getElementsByTagName("dtNasc").item(0).getTextContent());
+		    dadosL.add(document.getElementsByTagName("email").item(0).getTextContent());
+		    
+		    String[] dadosV = dadosL.toArray(new String[dadosL.size()]); 
+		    
+			return dadosV;
+			
+		} catch (IOException e){
+			
+			System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage());
+			return null;
+			
+		} catch (SAXException e) {
+			
+			System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage());
+			return null;
+			
+			
+		} catch (ParserConfigurationException e) {
+			
+			System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage());
+			return null;
+			
+		}
 	}
 }
