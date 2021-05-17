@@ -1,5 +1,6 @@
 package com.classes.DTO;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 
 public class Aluno extends Pessoa {
@@ -61,6 +62,25 @@ public class Aluno extends Pessoa {
 		builder.append(email);
 		builder.append("]");
 		return builder.toString();
+	}
+	
+	public ArrayList<String> toArrayList() {
+		ArrayList<String> valores = new ArrayList<String>();
+		valores.add(this.getNome());
+		valores.add(this.getMatricula());
+		valores.add(this.getCpf());
+		valores.add(this.getDtNasc().toString());
+		valores.add(this.getEmail());
+		
+		return valores;
+	}
+	
+	public void toAluno(ArrayList<String> valores) {
+		this.setNome(valores.get(0));
+		this.setMatricula(valores.get(1));
+		this.setCpf(valores.get(2));
+		this.setDtNasc(LocalDate.parse(valores.get(3)));
+		this.setEmail(valores.get(4));
 	}
 	
 }

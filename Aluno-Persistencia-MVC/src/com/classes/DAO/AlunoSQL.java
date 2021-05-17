@@ -59,9 +59,27 @@ public class AlunoSQL implements PersistenciaAluno {
                 return null;
             }
         } catch (Exception e) {
-        	System.out.println("Erro aqui");
+        	System.err.println("Erro: " + e.toString());
             return null;
         }
 	}
+	
+	public boolean excluir(String matricula) {
+        try {
+            Connection conn = Conexao.conectar();
+            String sql = "DELETE FROM " + NOMEDATABELA + " WHERE matricula = ?;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, matricula);
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
+            System.out.println("Aluno "+matricula+" deletado do Banco de Dados");
+            return true;
+        } catch (Exception e) {
+            System.err.println("Erro: " + e.toString());
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }

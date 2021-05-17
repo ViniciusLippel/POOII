@@ -1,6 +1,7 @@
 package com.classes.DAO;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -61,5 +62,16 @@ public class AlunoCSV implements PersistenciaAluno {
 			return null;
 			
 		}
+	}
+	
+	public boolean excluir(String matricula) {
+		File file = new File("dados_alunos/csv/"+matricula+".csv");
+		 if (file.delete()) { 
+		      System.out.println("Arquivo " + file.getName()+" deletado");
+		      return true;
+	    } else {
+	      System.out.println("Falha ao deletar arquivo");
+	      return false;
+	    } 
 	}
 }

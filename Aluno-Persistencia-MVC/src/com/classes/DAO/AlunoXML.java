@@ -80,4 +80,15 @@ public class AlunoXML implements PersistenciaAluno{
 			
 		}
 	}
+	
+	public boolean excluir(String matricula) {
+		File file = new File("dados_alunos/xml/"+matricula+".xml");
+		 if (file.delete()) { 
+		      System.out.println("Arquivo " + file.getName()+" deletado");
+		      return true;
+	    } else {
+	      System.out.println("Falha ao deletar arquivo");
+	      return false;
+	    } 
+	}
 }

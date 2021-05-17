@@ -7,4 +7,6 @@ public interface PersistenciaAluno {
 	public boolean gravar(Aluno aluno);
 	
 	public Aluno ler(String matricula);
+	
+	public boolean excluir(String matricula);
 }

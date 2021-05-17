@@ -27,4 +27,9 @@ public class AlunoBO {
 		return persistencia.ler(matricula);
 	}
 	
+	//Excluir
+	public boolean excluir(String matricula) {
+		return persistencia.excluir(matricula);
+	}
+	
 }
