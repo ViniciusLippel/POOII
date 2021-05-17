@@ -1,13 +1,16 @@
-package classes;
+package com.classes.BO;
 
 import java.time.LocalDate;
 
-public class PersistenciaAluno {
+import com.classes.DAO.Persistencia;
+import com.classes.DTO.Aluno;
+
+public class AlunoBO {
 	
 	private Aluno aluno;
 	private Persistencia persistencia;
 	
-	public PersistenciaAluno(Aluno aluno, Persistencia persistencia) {
+	public AlunoBO(Aluno aluno, Persistencia persistencia) {
 		this.aluno = aluno;
 		this.persistencia = persistencia;
 	}

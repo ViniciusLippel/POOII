@@ -1,5 +1,13 @@
-package classes;
+package com.classes.main;
 import java.time.LocalDate;
+
+import com.classes.BO.AlunoBO;
+import com.classes.DAO.PersistenciaCSV;
+import com.classes.DAO.PersistenciaJSON;
+import com.classes.DAO.PersistenciaXML;
+import com.classes.DTO.Aluno;
+
+
 
 public class Main {
 
@@ -20,16 +28,16 @@ public class Main {
 		//Armazenando dados nos diferentes formatos
 		System.out.println("Gravando dados dos alunos...\n");
 		
-		PersistenciaAluno p0 = new PersistenciaAluno(michael, pxml);
+		AlunoBO p0 = new AlunoBO(michael, pxml);
 		p0.gravar();
 		
-		PersistenciaAluno p1 = new PersistenciaAluno(jim, pjson);
+		AlunoBO p1 = new AlunoBO(jim, pjson);
 		p1.gravar();
 		
-		PersistenciaAluno p2 = new PersistenciaAluno(pam, pcsv);
+		AlunoBO p2 = new AlunoBO(pam, pcsv);
 		p2.gravar();
 		
-		PersistenciaAluno p3 = new PersistenciaAluno(dwight, pjson);
+		AlunoBO p3 = new AlunoBO(dwight, pjson);
 		p3.gravar();
 		
 		

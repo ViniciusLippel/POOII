@@ -1,4 +1,4 @@
-package classes;
+package com.classes.DAO;
 
 import java.io.FileWriter;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package classes;
+package com.classes.DAO;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
