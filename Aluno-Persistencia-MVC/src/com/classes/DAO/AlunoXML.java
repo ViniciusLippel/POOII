@@ -7,31 +7,35 @@ import java.util.ArrayList;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
+import com.classes.DTO.Aluno;
+
 import javax.xml.parsers.*;
 import java.io.*;
 
-public class PersistenciaXML implements Persistencia{
+public class AlunoXML implements PersistenciaAluno{
 	
 	//Gravar
-	public void gravar(String[] val) {
+	public boolean gravar(Aluno aluno) {
 		
 		try {
-		      FileWriter myWriter = new FileWriter("dados_alunos/xml/"+val[1]+".xml");
+		      FileWriter myWriter = new FileWriter("dados_alunos/xml/"+aluno.getMatricula()+".xml");
 		      myWriter.write(
 		    		  "<aluno>\n"
-			    		  + "\t<nome>"+val[0]+"</nome>\n"
-			    		  + "\t<matricula>"+val[1]+"</matricula>\n"
-			    		  + "\t<cpf>"+val[2]+"</cpf>\n"
-			    		  + "\t<dtNasc>"+val[3]+"</dtNasc>\n"
-			    		  + "\t<email>"+val[4]+"</email>\n"
+			    		  + "\t<nome>"+aluno.getNome()+"</nome>\n"
+			    		  + "\t<matricula>"+aluno.getMatricula()+"</matricula>\n"
+			    		  + "\t<cpf>"+aluno.getCpf()+"</cpf>\n"
+			    		  + "\t<dtNasc>"+aluno.getDtNasc().toString()+"</dtNasc>\n"
+			    		  + "\t<email>"+aluno.getEmail()+"</email>\n"
     		  		+ "</aluno>\n"
 		    				  );
 		      myWriter.close();
-		      System.out.println("Arquivo "+val[1]+".xml criado com sucesso.");
+		      System.out.println("Arquivo "+aluno.getMatricula()+".xml criado com sucesso.");
+		      return true;
 		      
 		    } catch (IOException e) {
 		      System.out.println("Erro ao criar arquivo.");
 		      e.printStackTrace();
+		      return false;
 		    }
 	}
 	

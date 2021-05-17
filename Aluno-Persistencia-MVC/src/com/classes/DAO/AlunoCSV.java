@@ -6,25 +6,29 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import com.classes.DTO.Aluno;
 
-public class PersistenciaCSV implements Persistencia {
+
+public class AlunoCSV implements PersistenciaAluno {
 	
 	//Gravar
-	public void gravar(String[] val) {
+	public boolean gravar(Aluno aluno) {
 		
 		try {
 			
-			FileWriter arq = new FileWriter("dados_alunos/csv/"+val[1]+".csv");
+			FileWriter arq = new FileWriter("dados_alunos/csv/"+aluno.getMatricula()+".csv");
 			PrintWriter gravarArq = new PrintWriter(arq);
-			gravarArq.printf("%s;%s;%s;%s;%s\n", val[0], val[1], val[2], val[3], val[4]);
+			gravarArq.printf("%s;%s;%s;%s;%s\n", aluno.getNome(), aluno.getMatricula(), aluno.getCpf(), aluno.getDtNasc().toString(), aluno.getEmail());
 			arq.close();
 			
-			System.out.println("Arquivo "+val[1]+".csv criado com sucesso.");
+			System.out.println("Arquivo "+aluno.getMatricula()+".csv criado com sucesso.");
+			return true;
 			
 		} catch (IOException e) {
 			
 			e.printStackTrace();
 			System.out.println("Erro ao criar arquivo.");
+			return false;
 			
 		}	
 	}

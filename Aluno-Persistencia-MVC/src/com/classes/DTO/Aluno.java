@@ -9,6 +9,10 @@ public class Aluno extends Pessoa {
 	private LocalDate dtNasc;
 	private String email;
 	
+	
+	public Aluno() {
+	}
+
 	public Aluno(String nome, String matricula, String cpf, LocalDate dtNasc, String email) {
 		super(nome);
 		this.matricula = matricula;
@@ -41,6 +45,22 @@ public class Aluno extends Pessoa {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Aluno [matricula=");
+		builder.append(matricula);
+		builder.append(", cpf=");
+		builder.append(cpf);
+		builder.append(", dtNasc=");
+		builder.append(dtNasc);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", ");
+		builder.append(super.toString());
+		builder.append("]");
+		return builder.toString();
+	}
+	
 }

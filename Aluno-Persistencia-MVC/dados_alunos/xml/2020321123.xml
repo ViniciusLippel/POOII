@@ -1,0 +1,7 @@
+<aluno>
+	<nome>Michael Scott</nome>
+	<matricula>2020321123</matricula>
+	<cpf>098.765.432-10</cpf>
+	<dtNasc>1965-03-15</dtNasc>
+	<email>michael_s@email.com</email>
+</aluno>

@@ -5,13 +5,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedReader;
 
+import com.classes.DTO.Aluno;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class PersistenciaJSON implements Persistencia {
+public class AlunoJSON implements PersistenciaAluno {
 
 	//Gravar
-	public void gravar(String[] val) {
+	public boolean gravar(Aluno aluno) {
 
 		GsonBuilder builder = new GsonBuilder();
 		Gson gson = builder.create();
@@ -19,15 +20,17 @@ public class PersistenciaJSON implements Persistencia {
 		
 		try {
 			
-			writer = new FileWriter("dados_alunos/json/"+val[1]+".json");
-			writer.write(gson.toJson(val));
+			writer = new FileWriter("dados_alunos/json/"+aluno.getMatricula()+".json");
+			writer.write(gson.toJson(aluno));
 			writer.close();
-			System.out.println("Arquivo "+val[1]+".json criado com sucesso.");
+			System.out.println("Arquivo "+aluno.getMatricula()+".json criado com sucesso.");
+			return true;
 			
 		} catch (IOException e) {
 			
 			e.printStackTrace();
 			System.out.println("Erro ao criar arquivo.");
+			return false;
 			
 		}
 	}

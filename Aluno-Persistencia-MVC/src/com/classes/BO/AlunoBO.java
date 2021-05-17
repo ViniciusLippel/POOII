@@ -2,22 +2,26 @@ package com.classes.BO;
 
 import java.time.LocalDate;
 
-import com.classes.DAO.Persistencia;
+import com.classes.DAO.PersistenciaAluno;
 import com.classes.DTO.Aluno;
 
 public class AlunoBO {
 	
 	private Aluno aluno;
-	private Persistencia persistencia;
+	private PersistenciaAluno persistencia;
 	
-	public AlunoBO(Aluno aluno, Persistencia persistencia) {
+	public AlunoBO(PersistenciaAluno persistencia) {
+		this.persistencia = persistencia;
+	}
+	
+	public AlunoBO(Aluno aluno, PersistenciaAluno persistencia) {
 		this.aluno = aluno;
 		this.persistencia = persistencia;
 	}
 	
 	//Gravar
 	public void gravar() {
-		persistencia.gravar(objetoParaVetor());
+		persistencia.gravar(aluno);
 	}
 	
 	//Ler
