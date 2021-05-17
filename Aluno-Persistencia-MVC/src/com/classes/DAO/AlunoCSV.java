@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 
 import com.classes.DTO.Aluno;
 
@@ -34,7 +35,7 @@ public class AlunoCSV implements PersistenciaAluno {
 	}
 	
 	//Ler
-	public String[] ler(String matricula) {
+	public Aluno ler(String matricula) {
 		
 		try {
 			
@@ -42,9 +43,16 @@ public class AlunoCSV implements PersistenciaAluno {
 			BufferedReader lerArq = new BufferedReader(arq1);
 			String linha = lerArq.readLine();
 			String[] leitura = linha.split(";");
+			
+			Aluno aluno = new Aluno();
+			aluno.setNome(leitura[0]);
+			aluno.setMatricula(leitura[1]);
+			aluno.setCpf(leitura[2]);
+			aluno.setDtNasc(LocalDate.parse(leitura[3]));
+			aluno.setEmail(leitura[4]);
 			arq1.close();
 			
-			return leitura;
+			return aluno;
 			
 		} catch (IOException e) {
 			

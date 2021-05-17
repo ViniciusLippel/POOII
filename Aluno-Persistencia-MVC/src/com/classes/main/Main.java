@@ -14,6 +14,7 @@ public class Main {
 		AlunoXML pxml = new AlunoXML();
 		AlunoJSON pjson = new AlunoJSON();
 		AlunoCSV pcsv = new AlunoCSV();
+		AlunoSQL psql = new AlunoSQL();
 		
 		//Instanciando alunos e gravando dados nos diferentes formatos
 		System.out.println("Gravando dados dos alunos...\n");
@@ -34,7 +35,7 @@ public class Main {
 		alunoBO.gravar();
 		
 		aluno = new Aluno("Dwight Schrute", "2020002200", "444.555.666-77", LocalDate.of(1970, 01, 20), "dwight_s@email.com");
-		alunoBO = new AlunoBO(aluno, pjson);
+		alunoBO = new AlunoBO(aluno, psql);
 		alunoBO.gravar();
 		
 		
@@ -53,7 +54,7 @@ public class Main {
 		aluno = alunoBO.ler("2020456789");
 		System.out.println(aluno.toString());
 		
-		alunoBO = new AlunoBO(pjson);
+		alunoBO = new AlunoBO(psql);
 		aluno = alunoBO.ler("2020002200");
 		System.out.println(aluno.toString());
 	}

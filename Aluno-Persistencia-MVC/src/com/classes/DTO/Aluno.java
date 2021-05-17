@@ -49,7 +49,9 @@ public class Aluno extends Pessoa {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Aluno [matricula=");
+		builder.append("Aluno [");
+		builder.append(super.toString());
+		builder.append(", matricula=");
 		builder.append(matricula);
 		builder.append(", cpf=");
 		builder.append(cpf);
@@ -57,8 +59,6 @@ public class Aluno extends Pessoa {
 		builder.append(dtNasc);
 		builder.append(", email=");
 		builder.append(email);
-		builder.append(", ");
-		builder.append(super.toString());
 		builder.append("]");
 		return builder.toString();
 	}

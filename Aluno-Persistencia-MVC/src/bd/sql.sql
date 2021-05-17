@@ -23,13 +23,14 @@ USE `alunomvc` ;
 CREATE TABLE IF NOT EXISTS `alunomvc`.`Aluno` (
   `matricula` INT NOT NULL,
   `nome` VARCHAR(45) NOT NULL,
-  `cpf` VARCHAR(11) NOT NULL,
+  `cpf` VARCHAR(14) NOT NULL,
   `dtNasc` DATE NULL,
   `email` VARCHAR(45) NULL,
   PRIMARY KEY (`matricula`),
-  UNIQUE INDEX `matricula_UNIQUE` (`matricula` ASC) VISIBLE)
+  UNIQUE INDEX `matricula_UNIQUE` (`matricula` ASC))
 ENGINE = InnoDB;
 
+SELECT * FROM aluno;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

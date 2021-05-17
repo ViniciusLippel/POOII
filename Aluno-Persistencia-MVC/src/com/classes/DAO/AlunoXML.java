@@ -2,7 +2,7 @@ package com.classes.DAO;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.time.LocalDate;
 
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
@@ -40,7 +40,9 @@ public class AlunoXML implements PersistenciaAluno{
 	}
 	
 	//Ler
-	public String[] ler(String matricula) {
+	public Aluno ler(String matricula) {
+		
+		
 		
 		try {
 
@@ -50,18 +52,15 @@ public class AlunoXML implements PersistenciaAluno{
 			Document document = builder.parse(new File("dados_alunos/xml/"+matricula+".xml"));
 			 
 			document.getDocumentElement().normalize();
-			 
-			ArrayList<String> dadosL = new ArrayList<String>();
 			
-		    dadosL.add(document.getElementsByTagName("nome").item(0).getTextContent());
-		    dadosL.add(document.getElementsByTagName("matricula").item(0).getTextContent());
-		    dadosL.add(document.getElementsByTagName("cpf").item(0).getTextContent());
-		    dadosL.add(document.getElementsByTagName("dtNasc").item(0).getTextContent());
-		    dadosL.add(document.getElementsByTagName("email").item(0).getTextContent());
+			Aluno aluno = new Aluno();
+		    aluno.setNome(document.getElementsByTagName("nome").item(0).getTextContent());
+		    aluno.setMatricula(document.getElementsByTagName("matricula").item(0).getTextContent());
+		    aluno.setCpf(document.getElementsByTagName("cpf").item(0).getTextContent());
+		    aluno.setDtNasc(LocalDate.parse(document.getElementsByTagName("dtNasc").item(0).getTextContent()));
+		    aluno.setEmail(document.getElementsByTagName("email").item(0).getTextContent());
 		    
-		    String[] dadosV = dadosL.toArray(new String[dadosL.size()]); 
-		    
-			return dadosV;
+			return aluno;
 			
 		} catch (IOException e){
 			

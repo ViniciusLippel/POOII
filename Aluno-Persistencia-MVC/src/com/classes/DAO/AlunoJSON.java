@@ -36,17 +36,17 @@ public class AlunoJSON implements PersistenciaAluno {
 	}
 	
 	//Ler
-	public String[] ler(String matricula) {
-		
-		Gson gson = new Gson();
-		String[] dados = new String[5];
+	public Aluno ler(String matricula) {
 		
 	        try {
-	 
+	        	
+	        	Gson gson = new Gson();
+	    		Aluno aluno = new Aluno();
+	    		
 	            BufferedReader br = new BufferedReader(new FileReader("dados_alunos/json/"+matricula+".json"));
-	            dados = gson.fromJson(br, String[].class);
+	            aluno = gson.fromJson(br, Aluno.class);
 	            
-	            return dados;
+	            return aluno;
 	 
 	        } catch (IOException e) {
 	        	

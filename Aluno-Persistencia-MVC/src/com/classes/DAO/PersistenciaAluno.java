@@ -6,5 +6,5 @@ public interface PersistenciaAluno {
 	
 	public boolean gravar(Aluno aluno);
 	
-	public String[] ler(String matricula);
+	public Aluno ler(String matricula);
 }

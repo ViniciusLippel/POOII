@@ -7,5 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/vinic/OneDrive/Documentos/Eclipse_workspace/gson-2.8.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/vinic/OneDrive/Documentos/Eclipse_workspace/POOII/Aluno-Persistencia-MVC/src/lib/mysql-connector-java.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
